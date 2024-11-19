@@ -1,0 +1,107 @@
+﻿@model IEnumerable<BikeStore_FrontEnd.Dto.OrderDTO>
+
+@{
+    ViewData["Title"] = "Order Index";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-image: url(https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1712081598-santa-cruz-heckler-sl-1-6567823e0d7af.jpg?crop=0.817xw:0.815xh); /* Path to your bike image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            color: #fff; /* Set text color to white */
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background for the container */
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 50px; /* Adjust margin to center vertically */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            color: #FFD700; /* Gold color for the title */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            background-color: rgba(255, 255, 255, 0.9); /* Light background for the table */
+            color: #333; /* Dark text color for better contrast */
+        }
+
+        th {
+            background-color: #007bff; /* Blue background for table headers */
+            color: white; /* White text for headers */
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
+        }
+
+        td {
+            vertical-align: middle; /* Center the content in table cells */
+        }
+
+        .btn {
+            margin: 5px; /* Spacing for buttons */
+        }
+    </style>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Index</h1>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>User ID</th>
+                    <th>Order Date</th>
+                    <th>Status</th>
+                    <th>Total Amount</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var order in Model)
+                    {
+                        <tr>
+                            <td>@order.OrderId</td>
+                            <td>@order.UserId</td>
+                            <td>@order.OrderDate.ToString("d")</td>
+                            <td>@order.OrderStatus</td>
+                            <td>@order.TotalPrice.ToString("C")</td> <!-- Assuming TotalPrice is a property -->
+                            <td>
+                                <a asp-action="Details" asp-route-id="@order.OrderId" class="btn btn-info">Details</a>
+                                <a asp-action="Edit" asp-route-id="@order.OrderId" class="btn btn-warning">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@order.OrderId" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center">No orders found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @* <a asp-action="Create" class="btn btn-success">Create New Order</a> *@
+    </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+﻿@model IEnumerable<BikeStore_FrontEnd.Dto.ProductDTO>
+
+@{
+    ViewData["Title"] = "Product Index";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-image: url('~/images/bike-background.jpg'); /* Path to your bike image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            color: #fff; /* Set text color to white */
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background for the container */
+            border-radius: 8px;
+            padding: 40px;
+            margin-top: 50px; /* Adjust margin for centering */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            color: #FFD700; /* Gold color for the title */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            background-color: rgba(255, 255, 255, 0.9); /* White background for the table */
+            color: #000; /* Black text color for table */
+        }
+
+        th, td {
+            text-align: center; /* Centered text in table cells */
+        }
+
+        a {
+            color: #007bff; /* Bootstrap link color */
+            text-decoration: none; /* Remove underline from links */
+            transition: color 0.3s; /* Smooth color transition */
+        }
+
+        a:hover {
+            color: #0056b3; /* Darker shade on hover */
+        }
+    </style>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+
+        <p>
+            <a asp-action="Create" class="btn btn-success">Create New Product</a>
+        </p>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.ProductId)</th>
+                    <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Description)</th>
+                    <th>@Html.DisplayNameFor(model => model.Price)</th>
+                    <th>@Html.DisplayNameFor(model => model.CategoryId)</th>
+                    <th>@Html.DisplayNameFor(model => model.Brand)</th>
+                    <th>@Html.DisplayNameFor(model => model.ImageUrl)</th>
+                    <th>@Html.DisplayNameFor(model => model.StockQuantity)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ProductId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CategoryId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Brand)</td>
+                        <td><img src="@item.ImageUrl" alt="@item.Name" style="width:50px;height:auto;" /></td>
+                        <td>@Html.DisplayFor(modelItem => item.StockQuantity)</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }, new { @class = "btn btn-warning btn-sm" }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ProductId }, new { @class = "btn btn-info btn-sm" }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductId }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+

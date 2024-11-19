@@ -1,0 +1,22 @@
+﻿@model decimal?
+
+@{
+    ViewData["Title"] = "Cart Total";
+}
+
+<h2>Your Cart Total</h2>
+
+@if (Model.HasValue)
+{
+    <div class="alert alert-info">
+        <strong>Total Price:</strong> @Model.Value.ToString("C") <!-- Formatting as currency -->
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        <strong>Error:</strong> Unable to retrieve the total price.
+    </div>
+}
+
+<a asp-action="UserCart" asp-route-userId="@ViewData["UserId"]" class="btn btn-primary">Back to Cart</a>

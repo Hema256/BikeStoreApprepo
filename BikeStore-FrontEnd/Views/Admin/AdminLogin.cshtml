@@ -1,0 +1,78 @@
+﻿@model BikeStore_FrontEnd.Dto.UserLoginDTO
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-image: url('~/images/bike-background.jpg'); /* Path to your bike image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            color: #fff; /* Set text color to white */
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background for the container */
+            border-radius: 8px;
+            padding: 40px;
+            margin-top: 100px; /* Adjust margin for centering */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            color: #FFD700; /* Gold color for the title */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            color: #fff; /* White color for labels */
+        }
+
+        .btn-primary {
+            background-color: #007bff; /* Bootstrap primary button color */
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+
+        .text-danger {
+            color: #ff6b6b; /* Red color for validation messages */
+        }
+    </style>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+
+        <form asp-action="Login" method="post">
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PasswordHash"></label>
+                <input asp-for="PasswordHash" type="password" class="form-control" />
+                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+            </div>
+
+            <button asp-controller="Admin" asp-action="Index" type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+    </div>
+</body>
+</html>

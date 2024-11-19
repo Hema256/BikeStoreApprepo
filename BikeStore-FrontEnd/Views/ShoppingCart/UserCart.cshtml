@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BikeStore_FrontEnd.Dto.ShoppingCartDto>
+
+@{
+    ViewData["Title"] = "UserCart";
+}
+
+<h1>UserCart</h1>
+
+<p>
+    <a asp-action="AddToCart">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CartId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CartId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateCartItem", new { id = item.CartId }) |
+                    @Html.ActionLink("Details", "CartItemById", new { id = item.CartId }) |
+                    @Html.ActionLink("Delete", "RemoveFromCart", new { id = item.CartId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

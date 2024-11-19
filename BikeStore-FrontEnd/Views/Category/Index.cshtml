@@ -1,0 +1,116 @@
+﻿@model IEnumerable<BikeStore_FrontEnd.Dto.CategoryDTO>
+@{
+    ViewBag.Title = "Categories";
+}
+
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .categories-container {
+        background-image: url('https://example.com/your-background-image.jpg'); /* Replace with your image URL */
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        padding: 20px;
+        color: white;
+    }
+
+    .table-container {
+        background-color: rgba(255, 255, 255, 0.9); /* Light overlay with opacity */
+        padding: 20px;
+        border-radius: 8px;
+        color: #333; /* Text color for light background */
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333; /* Text color for light background */
+        text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .action-links a {
+        color: #3498db;
+        margin-right: 10px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .action-links a:hover {
+            color: #2980b9;
+        }
+</style>
+
+<div class="categories-container">
+    <h2>Categories</h2>
+    <div class="table-container">
+        <p>
+            <a href="@Url.Action("Create")" class="btn-primary">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Category Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                        <td class="action-links">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.CategoryId }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
